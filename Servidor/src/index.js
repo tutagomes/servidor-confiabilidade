@@ -33,6 +33,16 @@ app.post("/calcular", (req, res) => {
     res.send(calculado)    
 })
 
+app.get("/calcular", (req, res) => {
+    let resultado
+    db.all('SELECT * FROM `Coordenadas`', [], (err, row) => {
+        if(err) {
+            res.send(err)
+            return console.log(err.message);
+        }
+        res.send(row)
+    })
+})
 app.listen(8080, () =>
     console.log(
         "Mini server (with Express) ready at http://localhost:8080/!"
