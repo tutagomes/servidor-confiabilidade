@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 const bodyParser = require("body-parser");
+const os = require('os');
 var sqlite3 = require('sqlite3').verbose();
 
 let db = new sqlite3.Database('./coordenadas.db', (err) => {
@@ -15,7 +16,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.get("/", (req, res) => res.send("Server alive, with Express!"));
+app.get("/", (req, res) => res.send("Server alive! Container ID: " + os.hostname()));
 
 app.post("/calcular", (req, res) => {
     let coord = req.body
